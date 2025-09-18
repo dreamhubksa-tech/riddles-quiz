@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Basit Brain Teaser - Riddles Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f4f6;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    header {
+      background: #4f46e5;
+      color: white;
+      width: 100%;
+      text-align: center;
+      padding: 1rem;
+      font-size: 1.5rem;
+    }
+    .quiz-container {
+      background: white;
+      margin: 2rem;
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .question {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .options button {
+      display: block;
+      width: 100%;
+      margin: 0.5rem 0;
+      padding: 0.8rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      background: #e5e7eb;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .options button:hover {
+      background: #d1d5db;
+    }
+    .score {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+    footer {
+      margin: 2rem 0;
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+  <header>🧩 Basit Brain Teaser - Riddles Quiz</header>
+  <div class="quiz-container">
+    <div id="quiz">
+      <div class="question" id="question"></div>
+      <div class="options" id="options"></div>
+      <div class="score" id="score"></div>
+    </div>
+  </div>
+  <footer>© 2025 Basit Brain Teaser | Made with ❤️</footer>
+
+  <script>
+    const riddles = [
+      {
+        question: "ایسی کون سی چیز ہے جو جتنی بڑھتی ہے اتنی چھوٹی ہوتی جاتی ہے؟",
+        options: ["موم بتی", "پانی", "کتاب", "عمر"],
+        answer: "موم بتی"
+      },
+      {
+        question: "وہ کیا ہے جو سوکھنے کے ساتھ ساتھ گیلا ہوتا جاتا ہے؟",
+        options: ["تولیہ", "کپڑا", "پھول", "کاغذ"],
+        answer: "تولیہ"
+      },
+      {
+        question: "کون سا پرندہ کبھی گھونسلا نہیں بناتا؟",
+        options: ["کوئل", "کوا", "چڑیا", "کبوتر"],
+        answer: "کوئل"
+      }
+    ];
+
+    let current = 0;
+    let score = 0;
+
+    function loadQuestion() {
+      if (current < riddles.length) {
+        document.getElementById("question").innerText = riddles[current].question;
+        let optionsHTML = "";
+        riddles[current].options.forEach(opt => {
+          optionsHTML += `<button onclick="checkAnswer('${opt}')">${opt}</button>`;
+        });
+        document.getElementById("options").innerHTML = optionsHTML;
+        document.getElementById("score").innerText = `سکور: ${score}`;
+      } else {
+        document.getElementById("quiz").innerHTML = `<h2>Quiz ختم! 🎉</h2><p>آپ کا سکور ہے: ${score} / ${riddles.length}</p>`;
+      }
+    }
+
+    function checkAnswer(selected) {
+      if (selected === riddles[current].answer) {
+        score++;
+        alert("صحیح جواب! ✅");
+      } else {
+        alert("غلط جواب ❌");
+      }
+      current++;
+      loadQuestion();
+    }
+
+    loadQuestion();
+  </script>
+</body>
+</html>
